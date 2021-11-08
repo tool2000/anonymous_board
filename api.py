@@ -1,0 +1,19 @@
+from flask import Blueprint, render_template, jsonify, request
+from db_connect import db
+
+board = Blueprint('board',__name__)
+
+# 작성한 게시글을 볼 수 있도록 함수를 완성하세요.
+@board.route("/")
+def home():
+    return render_template('index.html')
+    
+    
+@board.route("/post",methods=["POST"])
+def create_post():
+    #process
+    return jsonify({'result':'success'})
+    
+@board.route("/like",methods=["PATCH"])
+def update_like():
+    return jsonfiy("good")

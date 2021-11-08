@@ -1,0 +1,69 @@
+<html>
+
+<head>
+    <title>elice - 익명게시판 만들기</title>
+    <script src="{{ url_for('static', filename='bootstrap.bundle.min.js') }}" > </script>
+    <script src="{{ url_for('static', filename='jquery.js') }}" > </script>
+    <link href="{{url_for('static',filename='bootstrap.min.css')}}" rel="stylesheet">
+
+    <style>
+        body {
+            /* background-color: #bda5eb; */
+            background-color: #7979D3;
+        }
+
+        .wrap {
+            width: 680px;
+            margin: 10px auto;
+        }
+
+        .title {
+            text-align: center;
+            color: aliceblue;
+        }
+    </style>
+    <script>
+        function postContent() {
+
+        }
+
+        function postLike(id) {
+            alert("POST Like!")
+        }
+
+    </script> 
+</head>
+
+<body>
+    <div class="wrap">
+        <h2 class="title">익명게시판</h2>
+        <hr>
+        <div class="card">
+            <h5 class="card-header">새 글 작성</h5>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label class="form-label">글을 작성하세요</label>
+                    <textarea id='my-content' class="form-control" rows="3"></textarea>
+                </div>
+                <button class="btn btn-primary" onclick="postContent()">작성하기</button>
+            </div>
+        </div>
+        <hr>
+        {% for d in data %}
+        <div class="card mt-2">
+            <div class="card-body">
+                <div class="mb-3">
+                    <label class="form-label">author</label>
+                    <p>content</p>
+                </div>
+                created_at
+            </div>
+            <div class="card-footer text-muted">
+                <span>좋아요 like 개</span>
+                <button class="btn btn-sm btn-success" onclick="postLike('id')">좋아요</button>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
