@@ -21,6 +21,10 @@
             text-align: center;
             color: aliceblue;
         }
+        .mybox {
+            display: flex;
+            justify-content: space-between;
+        }
     </style>
     <script>
         function postContent() {
@@ -35,13 +39,11 @@
                     'author': author
                 },
                 success: function(res) {
-                    let ok = res['result']
-                    if (ok == 'success') {
-                        alert("저장에 성공했습니다.")
-                        window.location.reload()
-                    } else {
-                        alert("통신에 실패했습니다.")
-                    }
+                    // let ok = res['result']
+                    //if (ok == 'success') {
+                    alert("저장에 성공했습니다.")
+                    window.location.reload()
+                    
                 }
              })
         }
@@ -68,21 +70,28 @@
             </div>
         </div>
         <hr>
-        {% for d in data %}
-        <div class="card mt-2">
-            <div class="card-body">
-                <div class="mb-3">
-                    <label class="form-label">author</label>
-                    <p>content</p>
+
+        <div class="mybox">
+            {% for d in data %}
+            <div class="card mt-2">
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label class="form-label">{{ d.author }}</label>
+                        <p>{{ d.content }}</p>
+                    </div>
+                    {{ d.created_at }}
                 </div>
-                created_at
+                <div class="card-footer text-muted">
+                    <span>좋아요 {{ d.ilike }} 개</span>
+                    <button class="btn btn-sm btn-success" onclick="postLike('id')">좋아요</button>
+                </div>
             </div>
-            <div class="card-footer text-muted">
-                <span>좋아요 like 개</span>
-                <button class="btn btn-sm btn-success" onclick="postLike('id')">좋아요</button>
-            </div>
+            {% set cnt=loop.index %}
+            {% if cnt % 3 == 0 %}
+                </div><div class="mybox">
+            {% endif %}
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
 
 </body>
