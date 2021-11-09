@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, jsonify, request
 from db_connect import db
+from models import Post
 
 board = Blueprint('board',__name__)
 
@@ -12,8 +13,15 @@ def home():
 @board.route("/post",methods=["POST"])
 def create_post():
     #process
+    content = request.form['content']
+    author = request.form['author']
+    #DB write
+    post = Post(author, content)
+    db.session.add(post)
+    db.session.commit()
+
     return jsonify({'result':'success'})
     
 @board.route("/like",methods=["PATCH"])
 def update_like():
-    return jsonfiy("good")
+    return jsonify("good")

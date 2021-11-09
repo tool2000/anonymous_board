@@ -25,7 +25,8 @@
     <script>
         function postContent() {
             content = $("#my-content").val()
-            author = Math.random().toString(20).substr(2,10)
+            author = Math.random().toString();
+
             $.ajax({
                 url: '/post',
                 type: 'post',
@@ -34,16 +35,15 @@
                     'author': author
                 },
                 success: function(res) {
-                    let result = res['result']
-                    if (result == "success") {
-                        alert("저장성공!");
-                        window.location.reload();
+                    let ok = res['result']
+                    if (ok == 'success') {
+                        alert("저장에 성공했습니다.")
+                        window.location.reload()
                     } else {
-                        alert("저장오류!");
+                        alert("통신에 실패했습니다.")
                     }
                 }
-            })
-
+             })
         }
 
         function postLike(id) {
@@ -84,5 +84,7 @@
         </div>
         {% endfor %}
     </div>
+
 </body>
 </html>
+
