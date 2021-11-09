@@ -24,6 +24,25 @@
     </style>
     <script>
         function postContent() {
+            content = $("#my-content").val()
+            author = Math.random().toString(20).substr(2,10)
+            $.ajax({
+                url: '/post',
+                type: 'post',
+                data: {
+                    'content': content,
+                    'author': author
+                },
+                success: function(res) {
+                    let result = res['result']
+                    if (result == "success") {
+                        alert("저장성공!");
+                        window.location.reload();
+                    } else {
+                        alert("저장오류!");
+                    }
+                }
+            })
 
         }
 
